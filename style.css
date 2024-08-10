@@ -1,0 +1,14 @@
+#calc-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
+
+.num, .operator, .special{
+    /* min-width: 40px;
+    min-height: 40px; */
+    border: 1px solid red;
+
+}

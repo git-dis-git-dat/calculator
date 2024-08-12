@@ -52,6 +52,11 @@ function operate(operator, num1, num2){
     }    
 }
 
+const buttons = document.querySelectorAll('.btn');
+buttons.forEach((el)=>el.addEventListener('click', ()=>console.log(el.id)))
+
+// display.textContent = 80085
+
 // listen to clicks on divs and get the text content and convert to number (int or float?) or operator and return them for use in the operate function
     // an ok side effect of getting text is that this might be a good spot to handle getting a decimal point(and disabling it from being entered again (unless it's on a new number)) before converting to num
 

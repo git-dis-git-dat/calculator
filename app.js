@@ -29,9 +29,9 @@ function percent(a){
 }
 // variables
 
-const operator = null;
-const num1 = 0;
-const num2 = 0;
+let operator = null;
+let num1 = [];
+let num2 = [];
 // const result = 0;
 
 // 
@@ -52,10 +52,20 @@ function operate(operator, num1, num2){
     }    
 }
 
-const buttons = document.querySelectorAll('.btn');
-buttons.forEach((el)=>el.addEventListener('click', ()=>console.log(el.id)))
+function setInput(button){
+    if(button.classList.contains('num')){
+        return parseInt(button.textContent)
+    }
+    if(button.classList.contains('operator')){
+        operator = button.id;
+    }
+}
 
-// display.textContent = 80085
+const buttons = document.querySelectorAll('.btn');
+buttons.forEach((el)=>el.addEventListener('click', ()=>setInput(el)))
+
+
+// push numbers into num1 [] when an operator is pressed join and parseInt
 
 // listen to clicks on divs and get the text content and convert to number (int or float?) or operator and return them for use in the operate function
     // an ok side effect of getting text is that this might be a good spot to handle getting a decimal point(and disabling it from being entered again (unless it's on a new number)) before converting to num

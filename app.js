@@ -53,13 +53,26 @@ function operate(operator, num1, num2){
 }
 
 function setInput(button){
-    if(button.classList.contains('num')){
-        return parseInt(button.textContent)
+    if(button.classList.contains('num') && !operator){
+        // if(num1.length === 0){num1.push(button.id.slice(1))}
+        num1.push(button.id.slice(1))
     }
     if(button.classList.contains('operator')){
         operator = button.id;
+        num1 = parseInt(num1.join(''));
+    }
+    if(button.classList.contains('num') && operator){
+        num2.push(button.id.slice(1))
+    }
+    if(button.id === 'equals'){
+        if(typeof num2 !== 'number'){num2 = parseInt(num2.join(''))};
+        num1 = operate(operator, num1, num2)
+        //num2 = [];
+        console.log(num1)
     }
 }
+
+// split handling array to num and have seperate equals funtion that only works on numbers?
 
 const buttons = document.querySelectorAll('.btn');
 buttons.forEach((el)=>el.addEventListener('click', ()=>setInput(el)))

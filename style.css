@@ -12,7 +12,7 @@ body{
     height: 40vw;
 }
 
-.num, .operator, .special{
+.btn{
     flex-basis: 25%;
     min-height: 16%;
     border: 1px solid red;

@@ -66,14 +66,20 @@ function updateDisplay(button){
         displayValue.push(button.textContent);
         display.textContent = displayValue.join('');
     }
-    if(button.classList.contains('operator') && !num1){
+    if(button.classList.contains('operator')){
+        if(!num1){num1 = parseFloat(displayValue.join(''));}
+        // if(num1 !== null){
+        //     num2 = parseFloat(displayValue.join(''));
+        //     num1 = operate(operator, num1, num2);
+        //     display.textContent = num1; 
+        // }
         operator = button.id;
-        num1 = parseFloat(displayValue.join(''));
         displayValue = [];
     }
     if(button.id === 'equals' && num1 !== null){
        num2 = parseFloat(displayValue.join(''));
-       display.textContent = operate(operator, num1, num2);
+       num1 = operate(operator, num1, num2);
+       display.textContent = num1;
     }
     // if(button.id === 'equals' && num2 !== null){
     //     num1 = parseFloat(display.textContent)

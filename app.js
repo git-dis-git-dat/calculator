@@ -30,8 +30,8 @@ function percent(a){
 // variables
 
 let operator = null;
-let num1 = 0;
-let num2 = 0;
+let num1 = null;
+let num2 = null;
 // const result = 0;
 let displayValue = [];
 
@@ -61,16 +61,45 @@ function updateDisplay(button){
     if(button.classList.contains('num')){
         displayValue.push(button.id.slice(1));
         display.textContent = displayValue.join('');
-        console.log(displayValue)
     }
     if(button.id === 'decimal' && !displayValue.includes('.')){
         displayValue.push(button.textContent);
         display.textContent = displayValue.join('');
     }
+    if(button.classList.contains('operator') && !num1){
+        operator = button.id;
+        num1 = parseFloat(displayValue.join(''));
+        displayValue = [];
+    }
+    if(button.id === 'equals' && num1 !== null){
+       num2 = parseFloat(displayValue.join(''));
+       display.textContent = operate(operator, num1, num2);
+    }
+    // if(button.id === 'equals' && num2 !== null){
+    //     num1 = parseFloat(display.textContent)
+    //     display.textContent = operate(operator, num1, num2);
+    // }
+    console.log(displayValue)
+    console.log({num1, num2, operator})
 }
 
-// split handling array to num and have seperate equals funtion that only works on numbers?
 
 
+/*
+if operator is pressed and num1 is empty fill num1
+if equals is pressed and num1 has a value fill num2
 
+USE CASES - flesh these out then reason through
+
+after pressing equals, pressing equals repeatedly 
+    can assign result of operation to num1
+    can init new result variable with restul of operation and use that
+
+after pressing equals, picking a new number and operator then equals
+    is this the same case as above?
+
+picking a number, an operator, another number, then another operator (should operate on first pair here)
+
+
+*/
 

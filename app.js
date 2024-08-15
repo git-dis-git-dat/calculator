@@ -67,12 +67,12 @@ function updateDisplay(button){
         display.textContent = displayValue.join('');
     }
     if(button.classList.contains('operator')){
+        if(num1 !== null){
+            num2 = parseFloat(displayValue.join(''));
+            num1 = operate(operator, num1, num2);
+            display.textContent = num1; 
+        }
         if(!num1){num1 = parseFloat(displayValue.join(''));}
-        // if(num1 !== null){
-        //     num2 = parseFloat(displayValue.join(''));
-        //     num1 = operate(operator, num1, num2);
-        //     display.textContent = num1; 
-        // }
         operator = button.id;
         displayValue = [];
     }

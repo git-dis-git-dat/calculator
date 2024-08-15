@@ -81,10 +81,13 @@ function updateDisplay(button){
        num1 = operate(operator, num1, num2);
        display.textContent = num1;
     }
-    // if(button.id === 'equals' && num2 !== null){
-    //     num1 = parseFloat(display.textContent)
-    //     display.textContent = operate(operator, num1, num2);
-    // }
+    if(button.classList.contains('special')){
+        let temp = parseFloat(displayValue.join('')); // number
+        operator = button.id;
+        temp = operate(operator, temp); // number
+        display.textContent = temp;
+        displayValue = temp.toString().split('');
+    }
     console.log(displayValue)
     console.log({num1, num2, operator})
 }

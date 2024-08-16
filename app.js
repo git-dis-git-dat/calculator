@@ -82,9 +82,13 @@ function updateDisplay(button){
        display.textContent = num1;
     }
     if(button.classList.contains('special')){
-        let temp = parseFloat(displayValue.join('')); // number
-        operator = button.id;
-        temp = operate(operator, temp); // number
+        let temp = 0;
+        if(num2 !== null){
+            temp = num1
+        }else{
+            temp = parseFloat(displayValue.join('')); // number
+        }
+        temp = operate(button.id, temp); // number
         display.textContent = temp;
         displayValue = temp.toString().split('');
     }

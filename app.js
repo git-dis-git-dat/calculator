@@ -66,32 +66,43 @@ function updateDisplay(button){
         displayValue.push(button.textContent);
         display.textContent = displayValue.join('');
     }
-    if(button.classList.contains('operator')){
-        if(num1 !== null){
-            num2 = parseFloat(displayValue.join(''));
-            num1 = operate(operator, num1, num2);
-            display.textContent = num1; 
-        }
-        if(!num1){num1 = parseFloat(displayValue.join(''));}
-        operator = button.id;
-        displayValue = [];
-    }
-    if(button.id === 'equals' && num1 !== null){
-       num2 = parseFloat(displayValue.join(''));
-       num1 = operate(operator, num1, num2);
-       display.textContent = num1;
-    }
     if(button.classList.contains('special')){
-        let temp = 0;
-        if(num2 !== null){
-            temp = num1
-        }else{
-            temp = parseFloat(displayValue.join('')); // number
-        }
+        let temp = parseFloat(displayValue.join('')); 
         temp = operate(button.id, temp); // number
         display.textContent = temp;
         displayValue = temp.toString().split('');
     }
+    if(button.classList.contains('operator')){
+        if(num1 !== null){
+            num2 = parseFloat(displayValue.join(''));
+            num1 = operate(operator, num1, num2);
+            display.textContent = num1;
+            displayValue = [];
+        }else if(!num1){
+            num1 = parseFloat(displayValue.join(''));
+        }
+        // else{
+        //     num1 = operate(operator, num1, num2);
+        //     display.textContent = num1;
+        // }
+        operator = button.id;
+        displayValue = [];
+    }
+    if(button.id === 'equals' && num1 !== null){
+        if(!num2){
+            num2 = parseFloat(displayValue.join(''));
+            num1 = operate(operator, num1, num2);
+            display.textContent = num1;
+        }else{
+            num1 = operate(operator, num1, num2);
+            display.textContent = num1;
+        }
+        
+        
+        displayValue = num1.toString().split('');
+        // displayValue = [];
+    }
+    
     console.log(displayValue)
     console.log({num1, num2, operator})
 }
@@ -115,4 +126,6 @@ picking a number, an operator, another number, then another operator (should ope
 
 
 */
+
+
 

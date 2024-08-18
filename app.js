@@ -67,6 +67,8 @@ function updateDisplay(button){
         display.textContent = displayValue.join('');
     }
     if(button.classList.contains('special')){
+        // if display value length > 0 probably
+        // if no display value get display?
         let temp = parseFloat(displayValue.join('')); 
         temp = operate(button.id, temp); // number
         display.textContent = temp;
@@ -75,29 +77,28 @@ function updateDisplay(button){
     if(button.classList.contains('operator')){
         if(!num1){
             num1 = parseFloat(displayValue.join(''));
-        }
-        
-        // else if(num1 !== null && num2 !== null){
-        //     // profit?
-        // }
-        
-        else if(num1 !== null){
+        }else if(!num2){
             num2 = parseFloat(displayValue.join(''));
             num1 = operate(operator, num1, num2);
             display.textContent = num1;
+            num2 = null
+        }else{
+            num2 = null
         }
+
         operator = button.id;
         displayValue = [];
     }
     if(button.id === 'equals'){
         if(!num2){
             num2 = parseFloat(displayValue.join(''));
-            num1 = operate(operator, num1, num2);
-            display.textContent = num1;
-        }else if(num2 !== null){
-            num1 = operate(operator, num1, num2);
-            display.textContent = num1;
         }
+        
+        num1 = operate(operator, num1, num2);
+        display.textContent = num1;
+
+        displayValue = []
+        // displayValue = num1.toString().split('');;
     }
     
     console.log(displayValue)

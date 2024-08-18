@@ -32,7 +32,6 @@ function percent(a){
 let operator = null;
 let num1 = null;
 let num2 = null;
-// const result = 0;
 let displayValue = [];
 
 // 
@@ -63,13 +62,17 @@ function updateDisplay(button){
         display.textContent = displayValue.join('');
     }
     if(button.id === 'decimal' && !displayValue.includes('.')){
-        displayValue.push(button.textContent);
+        if(displayValue.length < 1){
+            displayValue.push(0, button.textContent);
+        }else{
+            displayValue.push(button.textContent);
+        }
+        
         display.textContent = displayValue.join('');
     }
     if(button.classList.contains('special')){
-        // if display value length > 0 probably
-        // if no display value get display?
-        let temp = parseFloat(displayValue.join('')); 
+        
+        let temp = parseFloat(display.textContent); 
         temp = operate(button.id, temp); // number
         display.textContent = temp;
         displayValue = temp.toString().split('');
@@ -85,45 +88,35 @@ function updateDisplay(button){
         }else{
             num2 = null
         }
-
         operator = button.id;
         displayValue = [];
     }
     if(button.id === 'equals'){
-        if(!num2){
-            num2 = parseFloat(displayValue.join(''));
-        }
-        
-        num1 = operate(operator, num1, num2);
-        display.textContent = num1;
-
-        displayValue = []
-        // displayValue = num1.toString().split('');;
+        if(num1 !== null){
+            if(!num2){
+                num2 = parseFloat(displayValue.join(''));
+            }
+            
+            num1 = operate(operator, num1, num2);
+            display.textContent = num1;
+    
+            displayValue = []
+        } 
+    }
+    if(button.id === 'clear'){
+        operator = null;
+        num1 = null;
+        num2 = null;
+        displayValue = [];
+        display.textContent = 0;
     }
     
     console.log(displayValue)
     console.log({num1, num2, operator})
 }
 
-
-
-/*
-if operator is pressed and num1 is empty fill num1
-if equals is pressed and num1 has a value fill num2
-
-USE CASES - flesh these out then reason through
-
-after pressing equals, pressing equals repeatedly 
-    can assign result of operation to num1
-    can init new result variable with restul of operation and use that
-
-after pressing equals, picking a new number and operator then equals
-    is this the same case as above?
-
-picking a number, an operator, another number, then another operator (should operate on first pair here)
-
-
-*/
-
+// need to handle operator w no display value (checking for no display value may break chained operations)
+// related to above, how to handle 0 + number at start?
+// maybe an init functionn that sets the main variables that can be reused for clear?
 
 

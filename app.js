@@ -73,34 +73,31 @@ function updateDisplay(button){
         displayValue = temp.toString().split('');
     }
     if(button.classList.contains('operator')){
-        if(num1 !== null){
+        if(!num1){
+            num1 = parseFloat(displayValue.join(''));
+        }
+        
+        // else if(num1 !== null && num2 !== null){
+        //     // profit?
+        // }
+        
+        else if(num1 !== null){
             num2 = parseFloat(displayValue.join(''));
             num1 = operate(operator, num1, num2);
             display.textContent = num1;
-            displayValue = [];
-        }else if(!num1){
-            num1 = parseFloat(displayValue.join(''));
         }
-        // else{
-        //     num1 = operate(operator, num1, num2);
-        //     display.textContent = num1;
-        // }
         operator = button.id;
         displayValue = [];
     }
-    if(button.id === 'equals' && num1 !== null){
+    if(button.id === 'equals'){
         if(!num2){
             num2 = parseFloat(displayValue.join(''));
             num1 = operate(operator, num1, num2);
             display.textContent = num1;
-        }else{
+        }else if(num2 !== null){
             num1 = operate(operator, num1, num2);
             display.textContent = num1;
         }
-        
-        
-        displayValue = num1.toString().split('');
-        // displayValue = [];
     }
     
     console.log(displayValue)

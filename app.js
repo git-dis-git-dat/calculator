@@ -78,9 +78,9 @@ function updateDisplay(button){
         displayValue = temp.toString().split('');
     }
     if(button.classList.contains('operator')){
-        if(!num1){
+        if(!num1 && displayValue.length > 0){
             num1 = parseFloat(displayValue.join(''));
-        }else if(!num2){
+        }else if(!num2 && displayValue.length > 0){
             num2 = parseFloat(displayValue.join(''));
             num1 = operate(operator, num1, num2);
             display.textContent = num1;
@@ -92,7 +92,7 @@ function updateDisplay(button){
         displayValue = [];
     }
     if(button.id === 'equals'){
-        if(num1 !== null){
+        if(num1 !== null && displayValue.length > 0){
             if(!num2){
                 num2 = parseFloat(displayValue.join(''));
             }
@@ -115,8 +115,6 @@ function updateDisplay(button){
     console.log({num1, num2, operator})
 }
 
-// need to handle operator w no display value (checking for no display value may break chained operations)
-// related to above, how to handle 0 + number at start?
-// maybe an init functionn that sets the main variables that can be reused for clear?
+
 
 
